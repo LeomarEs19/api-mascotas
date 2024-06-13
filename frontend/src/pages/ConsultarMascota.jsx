@@ -30,7 +30,7 @@ function ConsultPets() {
                     </div>
                 </div>
                 <div className='w-full flex justify-center mt-8 px-5 flex-col gap-3 items-center'>
-                    <img src={`http://localhost:3000/public/img/${mascotas.imagen}`} alt="" className='w-[150px] h-[150px] rounded-full border border-blue-500' />
+                    <img src={`http://localhost:3333/public/img/${mascotas.imagen}`} alt="" className='w-[150px] h-[150px] rounded-full border border-blue-500' />
                     <div className='flex flex-col gap-3 w-full'>
                         <div className='w-full flex flex-row'>
                             <div className='w-[30%] px-5 py-3 bg-[#8090ac] rounded-l-lg'>

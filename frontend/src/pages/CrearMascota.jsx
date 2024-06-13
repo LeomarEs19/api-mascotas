@@ -45,16 +45,22 @@ function CreatePets() {
                 const formData = new FormData();
                 formData.append('nombre_mascota', nombre_mascota.current.value);
                 formData.append('raza_id', raza_id.current.value);
-                formData.append('imagen', imagen.current.files[0]);
+                
+                // Verificar si se seleccionó una nueva imagen antes de adjuntarla al FormData
+                if (imagen.current.files.length > 0) {
+                    formData.append('imagen', imagen.current.files[0]);
+                }
+                
                 formData.append('categoria_id', categoria_id.current.value);
                 formData.append('genero_id', genero_id.current.value);
-
-                const response = await axiosClient.post("/mascota", formData, {
+    
+                const response = await axiosClient.post("http://localhost:3333/mascota", formData, {
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data',
+                        token: localStorage.getItem('token'),
                     }
                 });
-
+    
                 if (response && response.status === 201) {
                     alert("Mascota creada correctamente");
                     navigate("/inicio");
@@ -67,6 +73,7 @@ function CreatePets() {
             alert("Error al crear la mascota. Verifica los datos e intenta nuevamente.");
         }
     };
+    
 
     return (
         <div className='w-full h-screen flex justify-center items-center'>

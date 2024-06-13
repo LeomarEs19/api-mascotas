@@ -11,7 +11,7 @@ function EditPet() {
     const [categorias, setCategorias] = useState([]);
     const [generos, setGeneros] = useState([]);
 
-    const nombre = useRef(null);
+    const nombre_mascota = useRef(null);
     const raza_id = useRef(null);
     const categoria_id = useRef(null);
     const imagen = useRef(null);
@@ -55,16 +55,16 @@ function EditPet() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (window.confirm("¿Estás seguro que quieres modificar la mascota?")) {
+            if (confirm("¿Estás seguro que quieres modificar la mascota?")) {
                 const formData = new FormData();
-                formData.append('nombre', nombre.current.value);
+                formData.append('nombre_mascota', nombre_mascota.current.value);
                 formData.append('raza_id', raza_id.current.value);
                 formData.append('imagen', imagen.current.files[0] || null);
                 formData.append('categoria_id', categoria_id.current.value);
                 formData.append('genero_id', genero_id.current.value);
 
                 const response = await axiosClient.put(`/mascota/${id}`, formData, {});
-                if (response && response.status === 200) {
+                if (response && response.status == 200) {
                     alert("Mascota actualizada correctamente");
                     navigate("/inicio");
                 } else {
@@ -86,11 +86,11 @@ function EditPet() {
                     </div>
                 </div>
                 <div className='w-full flex justify-center mt-8'>
-                    <img src={`http://localhost:3000/public/img/${mascotas.imagen}`} alt="" className='w-[150px] h-[150px] rounded-full border border-blue-500' />
+                    <img src={`http://localhost:3333/public/img/${mascotas.imagen}`} alt="" className='w-[150px] h-[150px] rounded-full border border-blue-500' />
                 </div>
                 <div>
                     <form className='w-full flex flex-col px-6 mt-14' onSubmit={handleSubmit} encType='multipart/form-data'>
-                        <input className='bg-white bg-opacity-60 rounded-full mb-6 px-4 py-4' type="text" name='mascotas_name' placeholder='Nombre' ref={nombre} defaultValue={mascotas.nombre_mascota}/>
+                        <input className='bg-white bg-opacity-60 rounded-full mb-6 px-4 py-4' type="text" name='mascotas_name' placeholder='Nombre' ref={nombre_mascota} defaultValue={mascotas.nombre_mascota}/>
                         <select ref={raza_id} className='bg-white bg-opacity-60 rounded-full mb-6 px-4 py-4'>
                             <option value="" >Seleccione raza</option>
                             {razas.map(r => (

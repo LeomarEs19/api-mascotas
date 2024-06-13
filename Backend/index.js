@@ -14,26 +14,26 @@ const PORT = 3333
 
 server.use(body_parser.json());
 server.use(body_parser.urlencoded({ extended: false}));
+server.use(cors())
 
 //ejs
 server.set('view engine', 'ejs')
 server.set('views', '/views')
-server.use('/public', express.static('/public'))
+server.use('/public', express.static('./public'))
 server.get('/document', (req, res) => {
     res.render('document.ejs')
-})
-
-server.use(cors())
-
-//rutas
-server.use(rutasAuth)
-server.use(validarToken, rutasUsuario)
-server.use(validarToken, mascotas)
-server.use(validarToken, rutaCategorias)
-server.use(validarToken, rutaGeneros)
-server.use(validarToken, rutaRazas)
-
-
-server.listen(PORT, () => {
-    console.log(`Servidor en funcionamiento en el puerto http://localhost:${PORT}`);
-});
+    })
+    
+    
+    //rutas
+    server.use(rutasAuth)
+    server.use(validarToken, rutasUsuario)
+    server.use(validarToken, mascotas)
+    server.use(validarToken, rutaCategorias)
+    server.use(validarToken, rutaGeneros)
+    server.use(validarToken, rutaRazas)
+    
+    
+    server.listen(PORT, () => {
+        console.log(`Servidor en funcionamiento en el puerto http://localhost:${PORT}`);
+        });

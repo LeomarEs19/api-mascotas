@@ -85,7 +85,14 @@ export const updatePets = async (req, res) => {
                 categoria_id=?, 
                 imagen=?, 
                 genero_id=? 
-            WHERE id=?`, [nombre_mascota || oldPet[0].nombre_mascota, raza_id || oldPet[0].raza_id, categoria_id || oldPet[0].categoria_id, imagen || oldPet[0].imagen, genero_id || oldPet[0].genero_id, id]);
+            WHERE id=?`, [
+                nombre_mascota ? nombre_mascota : oldPet[0].nombre_mascota,
+                raza_id ? raza_id :  oldPet[0].raza_id,
+                categoria_id ? categoria_id : oldPet[0].categoria_id,
+                imagen ? imagen : oldPet[0].imagen, // Usa la imagen existente si no se proporciona una nueva imagen
+                genero_id ? genero_id : oldPet[0].genero_id,
+                id
+            ]);
 
         if (result.affectedRows > 0) {
             return res.status(200).json({ message: 'Mascota actualizada con éxito' });
